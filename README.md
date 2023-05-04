@@ -23,7 +23,8 @@
 - [ftm](https://ftmscan.com/)
 - [optimism](https://optimistic.etherscan.io/)
 - [bsc](https://bscscan.com/)
-- ZK, Stark,
+- ZKlite
+- Starknet
 
 Вствить свой апиключ тут
 api ключи можно получить в профилях сканеров
