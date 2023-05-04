@@ -36,6 +36,10 @@ ARB, ARB-nova, ETH, Fantom, Polygon, OPT, BSC, StarkNet
 
 6-11 API ключи соответственно сетям
 
+.core/scans/config.py
+
+10 - api ключ для ARB-nova
+
 api ключи можно получить в профилях сканеров
 
 https://arbiscan.io/
@@ -44,4 +48,5 @@ https://polygonscan.com/
 https://ftmscan.com/
 https://optimistic.etherscan.io/
 https://bscscan.com/
+https://nova.arbiscan.io/
 
