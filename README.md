@@ -31,6 +31,10 @@ api ключи можно получить в профилях сканеров
 .models/Chain.py - файл можно открыть любым редактором текста
 
 
+.core/scans/config.py
+
+10 - api ключ для ARB-nova
+
 
 
 Remote, but together\
