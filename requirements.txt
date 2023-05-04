@@ -1,0 +1,6 @@
+aiohttp==3.8.3
+openpyxl==3.1.0
+pandas
+loguru
+requests
+BeautifulSoup4

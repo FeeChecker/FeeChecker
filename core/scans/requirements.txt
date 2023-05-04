@@ -1,0 +1,4 @@
+pandas
+loguru
+requests
+BeautifulSoup4

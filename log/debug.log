@@ -1,0 +1,17 @@
+2023-04-12 23:59:20.103 | INFO     | core.scans.main:get_wallets:232 - The beginning of parsing. Count of wallet: 3
+2023-04-12 23:59:20.115 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0xd0c5b2ff0df660f213c794d372e178b4c1e172a5. Left: 2 wallets
+2023-04-12 23:59:20.655 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0xed49da97feeb4ff5be6a8f9a3054e73cc53c3e4f. Left: 1 wallets
+2023-04-12 23:59:24.437 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0x3b35cd0f2baa0f59084649d68155e93f438fe32f. Left: 0 wallets
+2023-04-13 00:01:52.965 | INFO     | core.scans.main:get_wallets:246 - The end of parsing. Creating csv...
+2023-04-13 00:01:52.973 | INFO     | core.scans.main:get_wallets:232 - The beginning of parsing. Count of wallet: 3
+2023-04-13 00:01:53.013 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0xd0c5b2ff0df660f213c794d372e178b4c1e172a5. Left: 2 wallets
+2023-04-13 00:01:53.665 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0xed49da97feeb4ff5be6a8f9a3054e73cc53c3e4f. Left: 1 wallets
+2023-04-13 00:01:54.278 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0x3b35cd0f2baa0f59084649d68155e93f438fe32f. Left: 0 wallets
+2023-04-13 00:18:10.634 | INFO     | core.scans.main:get_wallets:232 - The beginning of parsing. Count of wallet: 3
+2023-04-13 00:18:10.644 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0xd0c5b2ff0df660f213c794d372e178b4c1e172a5. Left: 2 wallets
+2023-04-13 00:18:11.187 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0xed49da97feeb4ff5be6a8f9a3054e73cc53c3e4f. Left: 1 wallets
+2023-04-13 00:18:14.956 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0x3b35cd0f2baa0f59084649d68155e93f438fe32f. Left: 0 wallets
+2023-04-13 00:20:42.234 | INFO     | core.scans.main:get_wallets:232 - The beginning of parsing. Count of wallet: 3
+2023-04-13 00:20:42.244 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0xd0c5b2ff0df660f213c794d372e178b4c1e172a5. Left: 2 wallets
+2023-04-13 00:20:42.740 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0xed49da97feeb4ff5be6a8f9a3054e73cc53c3e4f. Left: 1 wallets
+2023-04-13 00:20:46.533 | INFO     | core.scans.main:get_wallets:235 - Parse wallet: 0x3b35cd0f2baa0f59084649d68155e93f438fe32f. Left: 0 wallets
