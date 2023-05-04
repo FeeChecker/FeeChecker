@@ -16,8 +16,9 @@
 
 # Сети
 
+- [eth](https://etherscan.io/)
 - [arb](https://arbiscan.io/)
-- [arbNova](https://etherscan.io/)
+- [arbNova](https://nova.arbiscan.io/)
 - [matic](https://polygonscan.com/)
 - [ftm](https://ftmscan.com/)
 - [optimism](https://optimistic.etherscan.io/)
