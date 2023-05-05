@@ -54,7 +54,10 @@ def create_tables_by_accounts(accounts, out_source, bookName):
     line = 2
     side = Side(border_style="medium", color="000000")
     for ind, acc in enumerate(accounts):
-        for fee_token in get_if_exist(chain_name, acc.fee_pay):
+        token_fees = get_if_exist(chain_name, acc.fee_pay)
+        if not token_fees:
+            continue
+        for fee_token in token_fees:
             first_token = list(get_if_exist(chain_name, acc.fee_pay))[0]
             fee_tk = acc.fee_pay[chain_name][fee_token]
             if fee_token == first_token:
