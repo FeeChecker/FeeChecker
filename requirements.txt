@@ -1,6 +1,7 @@
 aiohttp==3.8.3
+beautifulsoup4==4.12.2
+loguru==0.7.0
 openpyxl==3.1.0
-pandas
-loguru
-requests
-BeautifulSoup4
+pandas==2.0.0
+pyTelegramBotAPI==4.11.0
+requests==2.23.0

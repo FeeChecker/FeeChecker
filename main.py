@@ -1,6 +1,4 @@
 
-from telebot.async_telebot import AsyncTeleBot
-
 import os
 import asyncio
 import json
