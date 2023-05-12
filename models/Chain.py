@@ -9,6 +9,7 @@ class APIkeys():
     FANTOM = '356SS5HXNNT3EA391KN1IJWPT3UFS7ZDT9'
     OPTIMISM = '9XWTPRB4RA3GZWPCJ1FGYMQYHSMC8IBDKB'
     BSC = 'XXZ6RY8S546XDAU2SQN8NPX2KQWZ1Z37J1'
+    AVAX = 'E3Q4R8S1V59536354G98R2GUCRAU665YVT'
 
 
 class ChainName():
@@ -20,6 +21,7 @@ class ChainName():
     OPTIMISM = "opt"
     ZKSYNC = 'zk'
     BSC = 'bsc'
+    AVAX = 'avax'
 
 
 class ChainAPI():
@@ -30,8 +32,8 @@ class ChainAPI():
     FANTOM = 'https://api.ftmscan.com/api?'
     OPTIMISM = 'https://api-optimistic.etherscan.io/api?'
     BSC = 'https://api.bscscan.com/api?'
+    AVAX = 'https://api.snowtrace.io/api?'
     ZKSYNC = 'https://api.zksync.io/api/v0.2/'
-
 
 class TransactionByAccount():
     # ARBITRUM_NOVA = ChainAPI.ARBITRUM_NOVA + 'module=account&action=txlist&address='
@@ -43,6 +45,7 @@ class TransactionByAccount():
     FANTOM = ChainAPI.FANTOM + BASE_SCAN + APIkeys.FANTOM + '&address='
     OPTIMISM = ChainAPI.OPTIMISM + BASE_SCAN + APIkeys.OPTIMISM + '&address='
     BSC = ChainAPI.BSC + BASE_SCAN + APIkeys.BSC + '&address='
+    AVAX = ChainAPI.AVAX + BASE_SCAN + APIkeys.AVAX + '&address='
     ZKSYNC = ChainAPI.ZKSYNC + 'accounts/{}/transactions?from={}&limit=100&direction=older'
 
 class TokensByAccount():
@@ -52,6 +55,8 @@ class TokenPrices():
     ETH = ChainAPI.ETHEREUM + 'module=stats&action=ethprice&apikey=' + APIkeys.ETHEREUM
     MATIC = ChainAPI.POLYGON + 'module=stats&action=maticprice&apikey=' + APIkeys.POLYGON
     FTM = ChainAPI.FANTOM + 'module=stats&action=ftmprice&apikey=' + APIkeys.FANTOM
+    AVAX = ChainAPI.AVAX + 'module=stats&action=ethprice&apikey=' + APIkeys.AVAX
+    BSC = ChainAPI.BSC + 'module=stats&action=bnbprice&apikey=' + APIkeys.BSC
     ZK = ChainAPI.ZKSYNC + 'tokens/{}/priceIn/usd'
 
 class TokensWeiByAddrContract():

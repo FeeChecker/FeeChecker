@@ -112,6 +112,16 @@ async def get_accounts_transactions(wallets):
                         transactions[Chain.ChainName.BSC][addr] = json_data['result']
             except Exception as e:
                 print(f"Error in get_accounts_transactions BSC\n{e}")
+            # AVAX
+            try:
+                async with session.get(Chain.TransactionByAccount.AVAX + addr) as resp:
+                    json_data = await resp.json()
+                    if json_data['message'] == 'OK':
+                        if Chain.ChainName.AVAX not in transactions:
+                            transactions[Chain.ChainName.AVAX] = {}
+                        transactions[Chain.ChainName.AVAX][addr] = json_data['result']
+            except Exception as e:
+                print(f"Error in get_accounts_transactions AVAX\n{e}")
             # ZKSYNC
             try:
                 json_data = await get_all_transactions_by_addr_zksync(session, addr)

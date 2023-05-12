@@ -90,12 +90,18 @@ async def set_fee_prices(accounts):
         async with session.get(Chain.TokenPrices.FTM) as resp:
             json_data = await resp.json()
             FTM_price = float(json_data['result']['ethusd'])
+        async with session.get(Chain.TokenPrices.AVAX) as resp:
+            json_data = await resp.json()
+            AVAX_price = float(json_data['result']['ethusd'])
+        async with session.get(Chain.TokenPrices.BSC) as resp:
+            json_data = await resp.json()
+            BNB_price = float(json_data['result']['ethusd'])
+        
 
         eth_chains = [
             Chain.ChainName.ETHEREUM,
             Chain.ChainName.ARBITRUM,
-            Chain.ChainName.OPTIMISM,
-            Chain.ChainName.BSC]
+            Chain.ChainName.OPTIMISM]
 
         zk_tokens = []
         for ind, acc in enumerate(accounts):
@@ -106,6 +112,11 @@ async def set_fee_prices(accounts):
                     accounts[ind].fee_pay[fee_chain]['in_usd'] = FTM_price * acc.fee_pay[fee_chain]['count']
                 if fee_chain == Chain.ChainName.POLYGON:
                     accounts[ind].fee_pay[fee_chain]['in_usd'] = MATIC_price * acc.fee_pay[fee_chain]['count']
+                if fee_chain == Chain.ChainName.AVAX:
+                    accounts[ind].fee_pay[fee_chain]['in_usd'] = AVAX_price * acc.fee_pay[fee_chain]['count']
+                if fee_chain == Chain.ChainName.BSC:
+                    accounts[ind].fee_pay[fee_chain]['in_usd'] = BNB_price * acc.fee_pay[fee_chain]['count']
+                
 
                 if fee_chain == Chain.ChainName.ZKSYNC:
                     zk_tokens.extend(list(acc.fee_pay[fee_chain].keys()))

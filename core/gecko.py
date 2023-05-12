@@ -74,12 +74,16 @@ def set_token_prices(accounts, token_prices):
 
     MATIC_FEE = [Chain.ChainName.POLYGON]
 
+    AVAX_FEE = [Chain.ChainName.AVAX]
+
     ETH_price = next(token_prices[g]
                      for g in token_prices if g == 'eth')['price']
     FTM_price = next(token_prices[g]
                      for g in token_prices if g == 'ftm')['price']
     MATIC_price = next(token_prices[g]
                        for g in token_prices if g == 'matic')['price']
+    AVAX_price = next(token_prices[g]
+                        for g in token_prices if g == 'avax')['price']
     for ind, acc in enumerate(accounts):
         for chain_name in acc.fee_pay:
             if chain_name in ETH_FEE:
@@ -88,6 +92,8 @@ def set_token_prices(accounts, token_prices):
                 accounts[ind].fee_pay[chain_name]['in_usd'] = acc.fee_pay[chain_name]['count'] * FTM_price
             if chain_name in MATIC_FEE:
                 accounts[ind].fee_pay[chain_name]['in_usd'] = acc.fee_pay[chain_name]['count'] * MATIC_price
+            if chain_name in AVAX_FEE:
+                accounts[ind].fee_pay[chain_name]['in_usd'] = acc.fee_pay[chain_name]['count'] * AVAX_price
 
     return accounts
 

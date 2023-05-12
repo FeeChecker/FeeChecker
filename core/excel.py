@@ -30,6 +30,9 @@ def name_by_chain(chain):
             return "ZkSync"
         case 'bsc':
             return "BSC"
+        case 'avax':
+            return "Avalanche"
+
 
 
 def create_tables_by_accounts(accounts, out_source, bookName):
@@ -41,7 +44,8 @@ def create_tables_by_accounts(accounts, out_source, bookName):
         Chain.ChainName.ETHEREUM,
         Chain.ChainName.FANTOM,
         Chain.ChainName.POLYGON,
-        Chain.ChainName.BSC]
+        Chain.ChainName.BSC,
+        Chain.ChainName.AVAX]
 
     arbitrum = wb.active
     arbitrum.title = 'ZkSync'
@@ -56,6 +60,7 @@ def create_tables_by_accounts(accounts, out_source, bookName):
     for ind, acc in enumerate(accounts):
         token_fees = get_if_exist(chain_name, acc.fee_pay)
         if not token_fees:
+            print(acc)
             continue
         for fee_token in token_fees:
             first_token = list(get_if_exist(chain_name, acc.fee_pay))[0]
@@ -244,7 +249,17 @@ def create_tables_by_accounts(accounts, out_source, bookName):
         arbitrum['K1'].font = Font(b=True, size=14)
         arbitrum['K1'].alignment = Alignment(
             horizontal='center', vertical='center')
-        arbitrum['K1'] = 'ETH SPENT ON GAS'
+        if chain_name == Chain.ChainName.AVAX:
+            chain_fee_token_name = 'AVAX'
+        elif chain_name == Chain.ChainName.BSC:
+            chain_fee_token_name = 'BNB'
+        elif chain_name == Chain.ChainName.FANTOM:
+            chain_fee_token_name = 'FTM'
+        elif chain_name == Chain.ChainName.POLYGON:
+            chain_fee_token_name = 'MATIC'
+        else:
+            chain_fee_token_name = 'ETH'
+        arbitrum['K1'] = f'{chain_fee_token_name} SPENT ON GAS'
         arbitrum.merge_cells('K2:O7')
         arbitrum['K2'].font = Font(b=True, size=20)
         arbitrum['K2'].alignment = Alignment(
