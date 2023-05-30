@@ -7,7 +7,9 @@ import time
 from core import initialization, gecko, excel, tokens
 from models import Chain
 from utils.gecko import token_list_ids, nft_list_ids
+from utils.tokens import merge_accounts
 
+from core.scans import polygon
 from core.scans import config as out_source_cfg
 from core.scans import main as out_source_funcs
 
@@ -33,6 +35,9 @@ async def main():
 
     accounts, transactions = await initialization.accounts_init(wallets)
 
+    polygon_accs = polygon.get_acounts_by_wallets('wallets.txt')
+    print("polygon_accs", polygon_accs)
+    accounts = merge_accounts(accounts, polygon_accs)
     accounts = await tokens.set_fee_prices(accounts)
 
     # SCRAPING TOKENS
@@ -64,6 +69,7 @@ async def main():
         #     outs_CI[chain]["url"]
         # ))
         out_source[chain] = out_source_funcs.get_wallets("wallets.txt", "stark_wallets.txt", chain, outs_CI[chain]["apikey"], outs_CI[chain]["file"], outs_CI[chain]["url"])
+
 
     print(out_source)
     print("All data ready")

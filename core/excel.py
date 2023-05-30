@@ -41,9 +41,9 @@ def create_tables_by_accounts(accounts, out_source, bookName):
     chains = [
         # Chain.ChainName.ARBITRUM,
         # Chain.ChainName.OPTIMISM,
+        Chain.ChainName.POLYGON,
         Chain.ChainName.ETHEREUM,
         Chain.ChainName.FANTOM,
-        Chain.ChainName.POLYGON,
         Chain.ChainName.BSC,
         Chain.ChainName.AVAX]
 

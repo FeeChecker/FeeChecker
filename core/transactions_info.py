@@ -73,15 +73,15 @@ async def get_accounts_transactions(wallets):
             except Exception as e:
                 print(f"Error in get_accounts_transactions ETHEREUM\n{e}")
             # POLYGON
-            try:
-                async with session.get(Chain.TransactionByAccount.POLYGON + addr) as resp:
-                    json_data = await resp.json()
-                    if json_data['message'] == 'OK':
-                        if Chain.ChainName.POLYGON not in transactions:
-                            transactions[Chain.ChainName.POLYGON] = {}
-                        transactions[Chain.ChainName.POLYGON][addr] = json_data['result']
-            except Exception as e:
-                print(f"Error in get_accounts_transactions POLYGON\n{e}")
+            # try:
+            #     async with session.get(Chain.TransactionByAccount.POLYGON + addr) as resp:
+            #         json_data = await resp.json()
+            #         if json_data['message'] == 'OK':
+            #             if Chain.ChainName.POLYGON not in transactions:
+            #                 transactions[Chain.ChainName.POLYGON] = {}
+            #             transactions[Chain.ChainName.POLYGON][addr] = json_data['result']
+            # except Exception as e:
+            #     print(f"Error in get_accounts_transactions POLYGON\n{e}")
             # FANTOM
             try:
                 async with session.get(Chain.TransactionByAccount.FANTOM + addr) as resp:
