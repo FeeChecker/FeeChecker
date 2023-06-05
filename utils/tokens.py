@@ -71,16 +71,16 @@ def merge_accounts(base_accs, m_accs):
     for i, acc in enumerate(base_accs):
         for m_acc in m_accs:
             if m_acc.wallet == acc.wallet:
-                base_accs[i].fist_trans[Chain.ChainName.POLYGON] = m_acc.fist_trans[Chain.ChainName.POLYGON]
+                if Chain.ChainName.POLYGON in m_acc.fist_trans:
+                    base_accs[i].fist_trans[Chain.ChainName.POLYGON] = m_acc.fist_trans[Chain.ChainName.POLYGON]
 
-                base_accs[i].last_trans[Chain.ChainName.POLYGON] = m_acc.last_trans[Chain.ChainName.POLYGON]
+                    base_accs[i].last_trans[Chain.ChainName.POLYGON] = m_acc.last_trans[Chain.ChainName.POLYGON]
 
-                base_accs[i].trans_count[Chain.ChainName.POLYGON] = m_acc.trans_count[Chain.ChainName.POLYGON]
+                    base_accs[i].trans_count[Chain.ChainName.POLYGON] = m_acc.trans_count[Chain.ChainName.POLYGON]
 
-                base_accs[i].avg_time_trans[Chain.ChainName.POLYGON] = m_acc.avg_time_trans[Chain.ChainName.POLYGON]
+                    base_accs[i].avg_time_trans[Chain.ChainName.POLYGON] = m_acc.avg_time_trans[Chain.ChainName.POLYGON]
 
-                base_accs[i].fee_pay[Chain.ChainName.POLYGON] = m_acc.fee_pay[Chain.ChainName.POLYGON]
-                print(acc)
+                    base_accs[i].fee_pay[Chain.ChainName.POLYGON] = m_acc.fee_pay[Chain.ChainName.POLYGON]
 
     return (base_accs)
                 

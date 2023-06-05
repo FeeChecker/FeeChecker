@@ -57,22 +57,23 @@ def get_acounts_by_wallets(file):
 
 		txsCount = int(soup.find_all('span', {'class': 'd-flex align-items-center'})[0].text.split(' ')[3].replace(',', '')) # magic move
 
-		walletTxs = get_all_txs_wallet_polygon(wallet, txsCount)
+		if (txsCount > 0):
+			walletTxs = get_all_txs_wallet_polygon(wallet, txsCount)
 
-		f_time = datetime.datetime.strptime(walletTxs[-1]['time'], "%Y-%m-%d %H:%M:%S")
-		l_time = datetime.datetime.strptime(walletTxs[0]['time'], "%Y-%m-%d %H:%M:%S")
-		acc.fist_trans[Chain.ChainName.POLYGON] = f_time.strftime("%d-%m-%Y %H:%M:%S")
-		acc.last_trans[Chain.ChainName.POLYGON] = l_time.strftime("%d-%m-%Y %H:%M:%S")
-		acc.fee_pay[Chain.ChainName.POLYGON] = dict()
-		acc.fee_pay[Chain.ChainName.POLYGON]['count'] = sum(
-			tx['fee']['count'] for tx in walletTxs
-		)
-		acc.trans_count[Chain.ChainName.POLYGON] = txsCount
+			f_time = datetime.datetime.strptime(walletTxs[-1]['time'], "%Y-%m-%d %H:%M:%S")
+			l_time = datetime.datetime.strptime(walletTxs[0]['time'], "%Y-%m-%d %H:%M:%S")
+			acc.fist_trans[Chain.ChainName.POLYGON] = f_time.strftime("%d-%m-%Y %H:%M:%S")
+			acc.last_trans[Chain.ChainName.POLYGON] = l_time.strftime("%d-%m-%Y %H:%M:%S")
+			acc.fee_pay[Chain.ChainName.POLYGON] = dict()
+			acc.fee_pay[Chain.ChainName.POLYGON]['count'] = sum(
+				tx['fee']['count'] for tx in walletTxs
+			)
+			acc.trans_count[Chain.ChainName.POLYGON] = txsCount
 
-		avgTimeDelta = (l_time - f_time) / txsCount
-		hours, rem = divmod(avgTimeDelta.total_seconds(), 3600)
-		mins, secs = divmod(rem, 60)
-		acc.avg_time_trans[Chain.ChainName.POLYGON] = f"{int(hours)}:{int(mins)}:{int(secs)}"
+			avgTimeDelta = (l_time - f_time) / txsCount
+			hours, rem = divmod(avgTimeDelta.total_seconds(), 3600)
+			mins, secs = divmod(rem, 60)
+			acc.avg_time_trans[Chain.ChainName.POLYGON] = f"{int(hours)}:{int(mins)}:{int(secs)}"
 
 		# print(acc)
 		accounts.append(acc)
