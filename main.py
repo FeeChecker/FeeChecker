@@ -1,4 +1,6 @@
 
+from loguru import logger
+
 import os
 import asyncio
 import json
@@ -15,71 +17,76 @@ from core.scans import main as out_source_funcs
 
 
 async def main():
-    wallets = []
-    accounts = []
+    try: # global try for logger
+        wallets = []
+        accounts = []
 
-    with open('wallets.txt', 'r') as file:
-        wallets = file.read().split('\n')
+        with open('wallets.txt', 'r') as file:
+            wallets = file.read().split('\n')
 
-    with open('json/сoin_gecko.json', 'rb') as file:
-        tokens_info_ = json.loads(file.read().decode('utf8'))
+        with open('json/сoin_gecko.json', 'rb') as file:
+            tokens_info_ = json.loads(file.read().decode('utf8'))
 
-    with open('json/nfts_gecko.json', 'rb') as file:
-        nft_info_ = json.loads(file.read().decode('utf8'))
+        with open('json/nfts_gecko.json', 'rb') as file:
+            nft_info_ = json.loads(file.read().decode('utf8'))
 
-    with open('json/zk_tokens.json', 'rb') as file:
-        zkTokensInfo = json.loads(file.read().decode('utf8'))
+        with open('json/zk_tokens.json', 'rb') as file:
+            zkTokensInfo = json.loads(file.read().decode('utf8'))
 
-    for i, val in enumerate(wallets):
-        wallets[i] = val.lower()    
+        for i, val in enumerate(wallets):
+            wallets[i] = val.lower()    
 
-    accounts, transactions = await initialization.accounts_init(wallets)
+        accounts, transactions = await initialization.accounts_init(wallets)
 
-    polygon_accs = polygon.get_acounts_by_wallets('wallets.txt')
-    print("polygon_accs", polygon_accs)
-    accounts = merge_accounts(accounts, polygon_accs)
-    accounts = await tokens.set_fee_prices(accounts)
+        polygon_accs = polygon.get_acounts_by_wallets('wallets.txt')
+        print("polygon_accs", polygon_accs)
+        accounts = merge_accounts(accounts, polygon_accs)
+        accounts = await tokens.set_fee_prices(accounts)
 
-    # SCRAPING TOKENS
-    # accounts = await initialization.accounts_tokens_nfts_init(accounts, transactions)
+        # SCRAPING TOKENS
+        # accounts = await initialization.accounts_tokens_nfts_init(accounts, transactions)
 
-    # tokens_ids = token_list_ids(accounts, tokens_info_) # {SYMBOL: "TOKEN_ID"}
-    # for acc in accounts:
-    #     print('\n', acc, '\n')
-    # token_prices = await gecko.get_token_prices(tokens_ids)
-    # token_prices = await tokens.zkTokenPrices(accounts, token_prices, zkTokensInfo)
-    # accounts = gecko.set_token_prices(accounts, token_prices)
+        # tokens_ids = token_list_ids(accounts, tokens_info_) # {SYMBOL: "TOKEN_ID"}
+        # for acc in accounts:
+        #     print('\n', acc, '\n')
+        # token_prices = await gecko.get_token_prices(tokens_ids)
+        # token_prices = await tokens.zkTokenPrices(accounts, token_prices, zkTokensInfo)
+        # accounts = gecko.set_token_prices(accounts, token_prices)
 
-    # SCRAPING NFTS
-    # contracts = nft_list_ids(accounts, nft_info_)
-    # # print(contracts)
-    # nft_prices = await gecko.get_nft_prices(contracts)
-    # # print(nft_prices)
-    # accounts = gecko.set_nft_prices(accounts, nft_prices)
+        # SCRAPING NFTS
+        # contracts = nft_list_ids(accounts, nft_info_)
+        # # print(contracts)
+        # nft_prices = await gecko.get_nft_prices(contracts)
+        # # print(nft_prices)
+        # accounts = gecko.set_nft_prices(accounts, nft_prices)
 
-    out_source = {}
-    outs_CI = out_source_cfg.CHAINS_INFO
-    for chain in outs_CI:
-        print(f"STARTING PARSING {chain.upper()}")
-        # print(out_source_funcs.get_wallets(
-        #     "wallets.txt",
-        #     outs_CI[chain],
-        #     outs_CI[chain]["apikey"],
-        #     outs_CI[chain]["file"],
-        #     outs_CI[chain]["url"]
-        # ))
-        out_source[chain] = out_source_funcs.get_wallets("wallets.txt", "stark_wallets.txt", chain, outs_CI[chain]["apikey"], outs_CI[chain]["file"], outs_CI[chain]["url"])
+        out_source = {}
+        outs_CI = out_source_cfg.CHAINS_INFO
+        for chain in outs_CI:
+            print(f"STARTING PARSING {chain.upper()}")
+            # print(out_source_funcs.get_wallets(
+            #     "wallets.txt",
+            #     outs_CI[chain],
+            #     outs_CI[chain]["apikey"],
+            #     outs_CI[chain]["file"],
+            #     outs_CI[chain]["url"]
+            # ))
+            out_source[chain] = out_source_funcs.get_wallets("wallets.txt", "stark_wallets.txt", chain, outs_CI[chain]["apikey"], outs_CI[chain]["file"], outs_CI[chain]["url"])
 
 
-    print(out_source)
-    print("All data ready")
+        print(out_source)
+        print("All data ready")
 
-    try:
-        excel.create_tables_by_accounts(accounts, out_source, 'Out')
+        try:
+            excel.create_tables_by_accounts(accounts, out_source, 'Out')
+        except Exception as e:
+            print("Cant open file", e)
+
     except Exception as e:
-        print("Cant open file", e)
+        logger.error(f'Global fatal error\n{e}')
 
 if __name__ == "__main__":
+    logger.add('file_{time}.log', format="{time} {level} {message}", level="DEBUG")
     start_time = time.time()
     asyncio.run(main())
     print(f"{int(time.time() - start_time)} seconds working")
